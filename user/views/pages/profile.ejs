@@ -1,0 +1,36 @@
+<%- include('../partials/header', { title: title, categories: typeof categories !== 'undefined' ? categories : [] }) %>
+<link rel="stylesheet" href="/css/profile-modern.css">
+<div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+  <div class="profile-modern-container w-100">
+    <div class="profile-modern-title">Thông Tin Tài Khoản</div>
+    <div class="profile-modern-info mb-4" style="text-align:center;">
+      <p style="font-size:2rem;font-weight:900;color:#0d6efd;margin-bottom:2px;">👤 <%= profileUser.fullName %></p>
+      <p style="font-size:1.15rem;font-weight:600;color:#222;margin-bottom:8px;">✉️ <%= profileUser.email %></p>
+      <p><strong>Tên đăng nhập:</strong> <%= profileUser.username %></p>
+      <p><strong>Số điện thoại:</strong> <%= profileUser.phone || 'Chưa cập nhật' %></p>
+      <p><strong>Địa chỉ:</strong> <%= profileUser.address || 'Chưa cập nhật' %></p>
+    </div>
+    <form class="profile-modern-form" action="/auth/profile" method="post">
+      <div class="mb-2">
+        <label for="fullName">Họ và Tên</label>
+        <input type="text" class="form-control" id="fullName" name="fullName" value="<%= profileUser.fullName %>" placeholder="Họ và Tên">
+      </div>
+      <div class="mb-2">
+        <label for="phone">Số điện thoại</label>
+        <input type="text" class="form-control" id="phone" name="phone" value="<%= profileUser.phone || '' %>" placeholder="Số điện thoại">
+      </div>
+      <div class="mb-2">
+        <label for="address">Địa chỉ</label>
+        <input type="text" class="form-control" id="address" name="address" value="<%= profileUser.address || '' %>" placeholder="Nhập địa chỉ đầy đủ">
+      </div>
+      <button type="submit" class="primary-btn w-100">Cập Nhật</button>
+    </form>
+    <div class="profile-modern-actions" style="justify-content:center;">
+      <a href="/order/history" class="btn btn-outline-primary btn-lg" style="font-size:1.25rem;padding:16px 48px;font-weight:800;border-width:3px;box-shadow:0 4px 24px #0d6efd22;letter-spacing:1px;">🛒 Lịch Sử Đơn Hàng</a>
+      <% if (currentUser.role === 'Shipper') { %>
+        <a href="/shipper/dashboard" class="btn btn-outline-info">Bảng Điều Khiển Giao Hàng</a>
+      <% } %>
+    </div>
+  </div>
+</div>
+<%- include('../partials/footer') %>
